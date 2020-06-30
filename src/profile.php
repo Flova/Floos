@@ -103,7 +103,7 @@ if (isset($_GET['p'])) {
                 } else {
                     $adminid = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  profile WHERE id = {$p}");
                     $adminid1 = mysqli_fetch_assoc($adminid);
-                    $frindlink = '<a href="frind.php?p=' . $adminid1['administraedFrom'] . '">In Kontaktliste aufnehmen</a>';
+                    $frindlink = '<a href="friend.php?p=' . $adminid1['administraedFrom'] . '">In Kontaktliste aufnehmen</a>';
                 }
             } else {
                 $frindlink = "Du befindest dich auf deiner Seite";

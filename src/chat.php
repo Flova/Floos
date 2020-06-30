@@ -130,7 +130,7 @@ if (isset($_GET['p'])) {
                         <?php
 if (isset($_GET['p'])) {
     echo '<iframe frameborder="0" style="width:100%; height:60px;" noresize="noresize" src="leiste.php?p=' . $_GET['p'] . '"></iframe>';
-    echo '<div style="padding-left:10px" ><iframe frameborder="0" style="width:100%" noresize="noresize" src="ref.php?p=' . $_GET['p'] . '"></iframe><div style="padding-left:8px"><a href="c_chat.php?p=' . $_GET['p'] . '">Den gesammten Chatverlauf ansehen</a></div></div>';
+    echo '<div style="padding-left:10px" ><iframe frameborder="0" style="width:100%" noresize="noresize" src="chat-refresh.php?p=' . $_GET['p'] . '"></iframe><div style="padding-left:8px"><a href="c_chat.php?p=' . $_GET['p'] . '">Den gesammten Chatverlauf ansehen</a></div></div>';
 } else {
     echo "W&auml;hle einen Kontakt zum Chatten aus";
 }
