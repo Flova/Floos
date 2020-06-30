@@ -1,17 +1,16 @@
-
 <?php
-// mehrere Empfänger
-$empfaenger  = 'flori.radio@gmx.de' . ', '; // beachten Sie das Komma
+// mehrere Empfï¿½nger
+$empfaenger = 'flori.radio@gmx.de' . ', '; // beachten Sie das Komma
 $empfaenger .= 'flori.vahl@web.de';
 
 // Betreff
-$betreff = 'Geburtstags-Erinnerungen für August';
+$betreff = 'Geburtstags-Erinnerungen fï¿½r August';
 
 // Nachricht
 $nachricht = '
 <html>
 <head>
-  <title>Geburtstags-Erinnerungen für August</title>
+  <title>Geburtstags-Erinnerungen fï¿½r August</title>
 </head>
 <body>
   <p>Hier sind die Geburtstage im August:</p>
@@ -30,11 +29,11 @@ $nachricht = '
 </html>
 ';
 
-// für HTML-E-Mails muss der 'Content-type'-Header gesetzt werden
-$header  = 'MIME-Version: 1.0' . "\r\n";
+// fï¿½r HTML-E-Mails muss der 'Content-type'-Header gesetzt werden
+$header = 'MIME-Version: 1.0' . "\r\n";
 $header .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
-// zusätzliche Header
+// zusï¿½tzliche Header
 $header .= 'cfzvghj <vtzubnj@vrifzr.com>' . "\r\n";
 
 // verschicke die E-Mail

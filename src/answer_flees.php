@@ -33,7 +33,7 @@ if(isset($_POST['f']) && isset($_POST['a']))
                   'ö' => '&ouml;',
                   'Ö' => '&Ouml;',
                   'ß' => '&szlig;' );
-    $aw = str_replace(array_keys($var), array_values($var),$aw); 
+    $aw = str_replace(array_keys($var), array_values($var),$aw);
 	$fleesid = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['f']);
 	$upload = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO answer VALUES('','" . $_POST['f'] . "','" . $_SESSION['userid'] . "','" . $aw . "','" . $date . "')");
 	//Weiterleitung
