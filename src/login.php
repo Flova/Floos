@@ -82,9 +82,9 @@ if($email != "" && $password != "") {
     }
 }
 else{
-   $host = $_SERVER['HTTP_HOST'];
-   $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-   echo("<script type='text/javascrip'>location.href = '$host$uri/index.php?f=1';</script>");
-   exit;
+    $host = $_SERVER['HTTP_HOST'];
+    $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    header("Location: http://$host$uri/index.php?f=1");
+    exit;
 }
 ?>
