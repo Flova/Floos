@@ -16,18 +16,18 @@ if($_FILES['img']['size'] < 10000000)
     {
         if(array_key_exists('img',$_FILES)) {
             $userid = $_POST['id'];
-            $idcheck = mysql_query("SELECT * FROM profile WHERE id = " . $userid);
-            $idcheck1 = mysql_fetch_assoc($idcheck);
+            $idcheck = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE id = " . $userid);
+            $idcheck1 = mysqli_fetch_assoc($idcheck);
             if($idcheck1['administraedFrom'] == $_SESSION['userid']) {
                 $name = $_FILES['img']['type'];
                 $ext = substr($name, 6);
                 move_uploaded_file($_FILES['img']['tmp_name'], "bilder/" . $userid . "." . $ext);
-                $result = mysql_query("SELECT * FROM `profileimages` WHERE  userid = " . $userid);
-            if(mysql_num_rows($result) == 0)
+                $result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `profileimages` WHERE  userid = " . $userid);
+            if(mysqli_num_rows($result) == 0)
                 {
-                    $sq = mysql_query("INSERT INTO  `profileimages` (id,imgType,userid) VALUES ('','" . $ext . "','" . $userid . "')");
+                    $sq = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO  `profileimages` (id,imgType,userid) VALUES ('','" . $ext . "','" . $userid . "')");
                 }else{
-                    $sq = mysql_query("UPDATE `profileimages` SET imgType = '" . $ext . "' WHERE userid = " . $userid );
+                    $sq = mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE `profileimages` SET imgType = '" . $ext . "' WHERE userid = " . $userid );
                 }
                 //Weiterleitung
                 $host = $_SERVER['HTTP_HOST'];

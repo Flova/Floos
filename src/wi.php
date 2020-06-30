@@ -22,33 +22,33 @@
  <?php
  						require('config.php');
 						//Pinwandausgabe
-						$selctPWData = mysql_query("SELECT * FROM  pinnwand WHERE postOnUserID = {$_GET['p']} ORDER BY poston DESC");
-						$user = mysql_query("SELECT * FROM  profile WHERE id = {$_GET['p']}");
-						$user = mysql_fetch_assoc($user);
+						$selctPWData = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  pinnwand WHERE postOnUserID = {$_GET['p']} ORDER BY poston DESC");
+						$user = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  profile WHERE id = {$_GET['p']}");
+						$user = mysqli_fetch_assoc($user);
 						echo "<h1>" . $user['profileName'] . "<div style='float:right'><a target='_blank' href='http://floos.flova.de'><img height='30px' src='floos_logo.png'></a></div></h1>";
-						while($pwData = mysql_fetch_assoc($selctPWData))
+						while($pwData = mysqli_fetch_assoc($selctPWData))
 						{
 							$ansers2 = "";
-							$selectPostFrom = mysql_query("SELECT * FROM user WHERE id = {$pwData['userid']}");
-							$PostUserName = mysql_fetch_assoc($selectPostFrom);
-							$homeid = mysql_query("SELECT * FROM  profile WHERE administraedFrom = {$PostUserName['id']} AND type = 1");
-							$homeid1 = mysql_fetch_assoc($homeid);
+							$selectPostFrom = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$pwData['userid']}");
+							$PostUserName = mysqli_fetch_assoc($selectPostFrom);
+							$homeid = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  profile WHERE administraedFrom = {$PostUserName['id']} AND type = 1");
+							$homeid1 = mysqli_fetch_assoc($homeid);
 		     				$date1 = new DateTime($pwData['poston']);
 		     				$date2 = $date1->format('H:i:s d.m.Y');
-		     				$answers1 = mysql_query("SELECT * FROM answer WHERE fleesID = " . $pwData['id'] . " ORDER BY date DESC");
-		     				if(mysql_num_rows($answers1) > 0)
+		     				$answers1 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM answer WHERE fleesID = " . $pwData['id'] . " ORDER BY date DESC");
+		     				if(mysqli_num_rows($answers1) > 0)
 		     				{
 		     					$ansers2 = '<br>Antworten:<div style="padding-left:20px;">';
 		     				}
-		     				while($answers = mysql_fetch_assoc($answers1))
+		     				while($answers = mysqli_fetch_assoc($answers1))
 							{
-								$answerID = mysql_query("SELECT * FROM user WHERE id = " . $answers['userid']);
-								$answerID1 = mysql_fetch_assoc($answerID);
-								$homeid2 = mysql_query("SELECT * FROM  profile WHERE administraedFrom = {$answers['userid']} AND type = 1");
-								$homeid2 = mysql_fetch_assoc($homeid2);
+								$answerID = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = " . $answers['userid']);
+								$answerID1 = mysqli_fetch_assoc($answerID);
+								$homeid2 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  profile WHERE administraedFrom = {$answers['userid']} AND type = 1");
+								$homeid2 = mysqli_fetch_assoc($homeid2);
 								$ansers2 = $ansers2 . "<a target='_blank' href='profile.php?p=" . $homeid2['id'] . "'>" . $answerID1['prename'] . " " . $answerID1['lastname'] . ":</a><br>" . $answers['text'] . "<br>";
 							}
-							if(mysql_num_rows($answers1) > 0)
+							if(mysqli_num_rows($answers1) > 0)
 		     				{
 								$ansers2 = $ansers2 . "</div>";
 							}

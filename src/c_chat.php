@@ -15,8 +15,8 @@ if(!isset($_SESSION['userid']))
             exit;
 }
 //Guckt, ob Freundschaftsanfragen vorhanden sind
-$select_friedship_requersts = mysql_query("SELECT * FROM  friendship WHERE secondid = {$_SESSION['userid']} AND confired = 0");
-$open_friendship_request = mysql_num_rows($select_friedship_requersts);
+$select_friedship_requersts = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  friendship WHERE secondid = {$_SESSION['userid']} AND confired = 0");
+$open_friendship_request = mysqli_num_rows($select_friedship_requersts);
 //Gibt einen Link aus,  falls Anfragen vorhanden sind
 if($open_friendship_request > 0)
 {
@@ -91,22 +91,22 @@ if($open_friendship_request > 0)
 						</div>
 						<div class="panel-body">
 				       		<?php 
-							$select1Frinds = mysql_query("SELECT * FROM `friendship` WHERE `confired` = 1 AND `firstid` = '{$_SESSION['userid']}'");
-							while($frinds1 = mysql_fetch_assoc($select1Frinds))
+							$select1Frinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `friendship` WHERE `confired` = 1 AND `firstid` = '{$_SESSION['userid']}'");
+							while($frinds1 = mysqli_fetch_assoc($select1Frinds))
 							{
-							$nfrind = mysql_query("SELECT * FROM user WHERE id = {$frinds1['secondid']}");
-							$nnfrind = mysql_fetch_assoc($nfrind);
-							$p3 = mysql_query("SELECT * FROM profile WHERE administraedFrom = {$frinds1['secondid']} AND type = 1 ");
-							$p4 = mysql_fetch_assoc($p3);
+							$nfrind = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$frinds1['secondid']}");
+							$nnfrind = mysqli_fetch_assoc($nfrind);
+							$p3 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$frinds1['secondid']} AND type = 1 ");
+							$p4 = mysqli_fetch_assoc($p3);
 							echo "<p><a href='profile.php?p=" .$p4['id'] ."'>" .$nnfrind['prename'] ." " .$nnfrind['lastname'] ."</a></p>";
 							}
-							$select2Frinds = mysql_query("SELECT * FROM `friendship` WHERE `confired` = 1 AND `secondid` = '{$_SESSION['userid']}'");
-							while($frinds2 = mysql_fetch_assoc($select2Frinds))
+							$select2Frinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `friendship` WHERE `confired` = 1 AND `secondid` = '{$_SESSION['userid']}'");
+							while($frinds2 = mysqli_fetch_assoc($select2Frinds))
 							{
-							$nfrind1 = mysql_query("SELECT * FROM user WHERE id = {$frinds2['firstid']}");
-							$nnfrind2 = mysql_fetch_assoc($nfrind1);
-							$p5 = mysql_query("SELECT * FROM profile WHERE administraedFrom = {$frinds2['firstid']} AND type = 1 ");
-							$p6 = mysql_fetch_assoc($p5);
+							$nfrind1 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$frinds2['firstid']}");
+							$nnfrind2 = mysqli_fetch_assoc($nfrind1);
+							$p5 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$frinds2['firstid']} AND type = 1 ");
+							$p6 = mysqli_fetch_assoc($p5);
 							echo "<p><a href='profile.php?p=" .$p6['id'] ."'>" .$nnfrind2['prename'] ." " .$nnfrind2['lastname'] ."</a></p>";
 							}
 							?>
@@ -116,11 +116,11 @@ if($open_friendship_request > 0)
 						</div>
 						<div class="panel-body">
 							<?php
-							$select1Profile = mysql_query("SELECT * FROM `likes` WHERE `userID` = '{$_SESSION['userid']}'");
-							while($frinds8 = mysql_fetch_assoc($select1Profile))
+							$select1Profile = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `likes` WHERE `userID` = '{$_SESSION['userid']}'");
+							while($frinds8 = mysqli_fetch_assoc($select1Profile))
 							{
-							$nfrind9 = mysql_query("SELECT * FROM profile WHERE id = {$frinds8['pageID']}");
-							$nnfrind9 = mysql_fetch_assoc($nfrind9);
+							$nfrind9 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE id = {$frinds8['pageID']}");
+							$nnfrind9 = mysqli_fetch_assoc($nfrind9);
 							echo "<p><a href='profile.php?p=" .$nnfrind9['id'] ."'>" .$nnfrind9['profileName'] ."</a></p>";
 							}
 							?>
@@ -149,8 +149,8 @@ if($open_friendship_request > 0)
 			           		<?php
 			            		if(isset($_GET['p']))
 									{
-					            		$selectsmFrom = mysql_query("SELECT * FROM user WHERE id = {$_GET['p']}");
-										$smUserName = mysql_fetch_assoc($selectsmFrom);
+					            		$selectsmFrom = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$_GET['p']}");
+										$smUserName = mysqli_fetch_assoc($selectsmFrom);
 										echo "<b>Chat mit " . $smUserName['prename'] . " " . $smUserName['lastname'] . "</b> (Verlauf)";
 									}else{
 										echo "<b>System</b>";
@@ -165,11 +165,11 @@ if($open_friendship_request > 0)
 					            		//Chatausgabe
 										$myId = $_SESSION['userid'];
 										$secId = $_GET['p'];
-										$selctCHData = mysql_query("SELECT * FROM `Chat` WHERE ( `firstID` = " . $myId . " AND `secondID` = " . $secId . " ) OR ( `firstID` = " . $secId . " AND `secondID` = " . $myId . " ) ORDER BY time DESC LIMIT 0 , 50 ");
-										while($CHData = mysql_fetch_assoc($selctCHData))
+										$selctCHData = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `Chat` WHERE ( `firstID` = " . $myId . " AND `secondID` = " . $secId . " ) OR ( `firstID` = " . $secId . " AND `secondID` = " . $myId . " ) ORDER BY time DESC LIMIT 0 , 50 ");
+										while($CHData = mysqli_fetch_assoc($selctCHData))
 										{
-											$selectsmFrom = mysql_query("SELECT * FROM user WHERE id = {$CHData['firstID']}");
-											$smUserName = mysql_fetch_assoc($selectsmFrom);
+											$selectsmFrom = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$CHData['firstID']}");
+											$smUserName = mysqli_fetch_assoc($selectsmFrom);
 											echo "<b>" . $smUserName['prename'] . " " . $smUserName['lastname']  . ":</b> " . $CHData['message'] . "<br>";
 										}
 									}else{

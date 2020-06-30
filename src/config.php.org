@@ -1,0 +1,11 @@
+<?php
+//Diese Datei stellt die Verbingung zur Datenbank her
+
+
+// Error Reporting komplett abschalten
+error_reporting(0);
+//Mit der Datenbankserver verbinden
+mysql_connect("db535539663.db.1and1.com", "dbo535539663" , "floos321", "db535539663") or die("Fehler bei der Verbindung mit der Datenbank.");
+//Datenbank auswählen
+mysql_select_db("db535539663");
+?>

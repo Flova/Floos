@@ -10,13 +10,13 @@ require_once('config.php');
 if(isset($_GET['p']))
 {
 	//Variable aufbebreiten und in die Datenbank damit 
-	$p = mysql_real_escape_string($_GET['p']);
-	$insert = mysql_query("INSERT INTO friendship VALUES('','{$_SESSION['userid']}','{$p}',0)");
+	$p = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET['p']);
+	$insert = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO friendship VALUES('','{$_SESSION['userid']}','{$p}',0)");
 	//Anschliessend wieder zum Profil
 	$host = $_SERVER['HTTP_HOST'];
 	$uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-	$homeid = mysql_query("SELECT * FROM  profile WHERE administraedFrom = {$p} AND type = 1");
-	$homeid1 = mysql_fetch_assoc($homeid);
+	$homeid = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  profile WHERE administraedFrom = {$p} AND type = 1");
+	$homeid1 = mysqli_fetch_assoc($homeid);
 	header("Location: http://$host$uri/profile.php?p=" . $homeid1['id'] );
 	exit;
 }

@@ -23,30 +23,30 @@ if($prename != "" && $lastname !="" && $email != "" && $password != "")
                         {
                             //Sicherheit
                             $prename = htmlspecialchars($prename);
-                            $prename = mysql_real_escape_string($prename);
+                            $prename = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $prename);
                             $prename = htmlentities($prename);
                             $lastname = htmlspecialchars($lastname);
-                            $lastname = mysql_real_escape_string($lastname);
+                            $lastname = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $lastname);
                             $lastname = htmlentities($lastname);
                             $email = htmlspecialchars($email);
-                            $email = mysql_real_escape_string($email);
+                            $email = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $email);
                             $email = htmlentities($email);
                             $password = md5($password);
                             //Verbindung mit Datenbank
-                            mysql_connect("comixfuerjbs.co.ohostsql.de", "mysql1110504", "floos123") or die("Fehler bei der Verbindung mit der Datenbank.");
-                            mysql_select_db("mysql1110504");
+                            ($GLOBALS["___mysqli_ston"] = mysqli_connect("comixfuerjbs.co.ohostsql.de",  "mysql1110504",  "floos123")) or die("Fehler bei der Verbindung mit der Datenbank.");
+                            mysqli_select_db($GLOBALS["___mysqli_ston"], mysql1110504);
                             //Checken, ob E-Mail schon vorhanden
-                            $selectEMail = mysql_query("SELECT * FROM user WHERE email = '{$email}'");
-                            if(mysql_num_rows($selectEMail) == 0)
+                            $selectEMail = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE email = '{$email}'");
+                            if(mysqli_num_rows($selectEMail) == 0)
                             {
 								//Werte in Datenbank schreiben
-                                $insertDate = mysql_query("INSERT INTO  user VALUES ('' ,  '{$prename}',  '{$lastname}',  '{$email}',  '{$password}')");
+                                $insertDate = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO  user VALUES ('' ,  '{$prename}',  '{$lastname}',  '{$email}',  '{$password}')");
 								//Letzte Nutzerid auslesen, um Profil anzulegen
-								$selctLastID = mysql_query("SELECT id FROM user ORDER BY id DESC LIMIT 1");
-								$LastId = mysql_fetch_assoc($selctLastID);
+								$selctLastID = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT id FROM user ORDER BY id DESC LIMIT 1");
+								$LastId = mysqli_fetch_assoc($selctLastID);
 								$lID = $LastId['id'];
 								//Profil anlegen
-								$createProfile = mysql_query("INSERT INTO  profile (id ,administraedFrom ,type ,profileName )VALUES ('',  '{$lID}',  '1',  '{$prename} {$lastname}')");
+								$createProfile = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO  profile (id ,administraedFrom ,type ,profileName )VALUES ('',  '{$lID}',  '1',  '{$prename} {$lastname}')");
                             }
                             else
                             {

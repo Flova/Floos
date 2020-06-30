@@ -21,26 +21,26 @@ if(!isset($_SESSION['userid']))
 if(isset($_POST['submit']))
 {
 	//Bereite die variable auf, um keinen Schaden in der Datenbank anzurichten
-	$p = mysql_real_escape_string($_POST['id']);
+	$p = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['id']);
 	//Holt sich Werte des Aktuellen Nutzers
-	$selectIsUserProfile = mysql_query("SELECT * FROM profile WHERE administraedFrom = {$_SESSION['userid']} AND id = {$p}");
+	$selectIsUserProfile = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$_SESSION['userid']} AND id = {$p}");
 	//Guckt, ob es der Richtige Nutzer ist, der Daten abfragt
 	//Wenn ja, darf er die Werte bearbeiten
-	if(mysql_num_rows($selectIsUserProfile) > 0)
+	if(mysqli_num_rows($selectIsUserProfile) > 0)
 	{
-		$inf = mysql_fetch_assoc($selectIsUserProfile);
+		$inf = mysqli_fetch_assoc($selectIsUserProfile);
 		if ($inf['type'] == 1) {
 			$pw = make_clickable(htmlspecialchars($_POST['pi']));
 			$pI = nl2br($pw);
-			$profilInfo = mysql_real_escape_string($pI);
-			$update = mysql_query("UPDATE profile SET profilInfos =  '{$profilInfo}' WHERE  id ={$p}");
+			$profilInfo = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pI);
+			$update = mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE profile SET profilInfos =  '{$profilInfo}' WHERE  id ={$p}");
 		} else {
 			$pn = make_clickable(htmlspecialchars($_POST['profiname']));
-			$profilname = mysql_real_escape_string($pn);
+			$profilname = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pn);
 			$pw = htmlspecialchars($_POST['pi']);
 			$pI = nl2br($pw);
-			$profilInfo = mysql_real_escape_string($pI);
-			$update = mysql_query("UPDATE profile SET profileName = '{$profilname}', profilInfos =  '{$profilInfo}' WHERE  id ={$p}");
+			$profilInfo = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pI);
+			$update = mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE profile SET profileName = '{$profilname}', profilInfos =  '{$profilInfo}' WHERE  id ={$p}");
 		}
 	}
 	//Nach der Bearbeitung, Seite reseten
@@ -52,21 +52,21 @@ if(isset($_POST['submit']))
 	
 }
 //Werte aus Datenbank auslesen, um die Werte in die Formularfelder einzusetzten
-$p = mysql_real_escape_string($_GET['p']);
-$selectIsUserProfile = mysql_query("SELECT * FROM profile WHERE administraedFrom = {$_SESSION['userid']} AND id = {$p}");
+$p = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET['p']);
+$selectIsUserProfile = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$_SESSION['userid']} AND id = {$p}");
 //Ist dass das Profil, auf welches zugegriffen werden soll
 //Wenn ja, werte Auslesen
-if(mysql_num_rows($selectIsUserProfile) > 0)
+if(mysqli_num_rows($selectIsUserProfile) > 0)
 {
-	$getUserMainProfil = mysql_query("SELECT * FROM profile WHERE administraedFrom = {$_SESSION['userid']} AND id = {$p}");
+	$getUserMainProfil = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$_SESSION['userid']} AND id = {$p}");
 }
 //Wenn nein, Nutzerprofil des angemeldeten Nutzters raussuchen
 else
 {
-	$getUserMainProfil = mysql_query("SELECT * FROM profile WHERE administraedFrom = {$_SESSION['userid']} AND type = 1}");
+	$getUserMainProfil = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$_SESSION['userid']} AND type = 1}");
 }
 //Daten aus datenbank Auslesen
-$data = mysql_fetch_assoc($getUserMainProfil);
+$data = mysqli_fetch_assoc($getUserMainProfil);
 //Werte, die in die Felder kommen
 //Trennzeichen des Profiles: 	-_-_-_:-_:->|-#*##
 $trenndata = str_replace("<br>", "" ,$data['profilInfos']);
@@ -74,8 +74,8 @@ $trenndata =  preg_replace('/<[^>]+>/','',$trenndata);
 $userProfileInfos = explode("-_-_-_:-_:->|-#*##", $trenndata);
 $tutorials = str_replace("<b>Über mich:</b>", "", $userProfileInfos[2]);
 //Guckt, ob Freundschaftsanfragen vorhanden sind
-$select_friedship_requersts = mysql_query("SELECT * FROM  friendship WHERE secondid = {$_SESSION['userid']} AND confired = 0");
-$open_friendship_request = mysql_num_rows($select_friedship_requersts);
+$select_friedship_requersts = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  friendship WHERE secondid = {$_SESSION['userid']} AND confired = 0");
+$open_friendship_request = mysqli_num_rows($select_friedship_requersts);
 //Gibt einen Link aus,  falls Anfragen vorhanden sind
 if($open_friendship_request > 0)
 {
@@ -159,22 +159,22 @@ if($data['type'] == 1){
 					</div>
 					<div class="panel-body">
 			       		<?php 
-						$select1Frinds = mysql_query("SELECT * FROM `friendship` WHERE `confired` = 1 AND `firstid` = '{$_SESSION['userid']}'");
-						while($frinds1 = mysql_fetch_assoc($select1Frinds))
+						$select1Frinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `friendship` WHERE `confired` = 1 AND `firstid` = '{$_SESSION['userid']}'");
+						while($frinds1 = mysqli_fetch_assoc($select1Frinds))
 						{
-						$nfrind = mysql_query("SELECT * FROM user WHERE id = {$frinds1['secondid']}");
-						$nnfrind = mysql_fetch_assoc($nfrind);
-						$p3 = mysql_query("SELECT * FROM profile WHERE administraedFrom = {$frinds1['secondid']} AND type = 1 ");
-						$p4 = mysql_fetch_assoc($p3);
+						$nfrind = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$frinds1['secondid']}");
+						$nnfrind = mysqli_fetch_assoc($nfrind);
+						$p3 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$frinds1['secondid']} AND type = 1 ");
+						$p4 = mysqli_fetch_assoc($p3);
 						echo "<p><a href='profile.php?p=" .$p4['id'] ."'>" .$nnfrind['prename'] ." " .$nnfrind['lastname'] ."</a></p>";
 						}
-						$select2Frinds = mysql_query("SELECT * FROM `friendship` WHERE `confired` = 1 AND `secondid` = '{$_SESSION['userid']}'");
-						while($frinds2 = mysql_fetch_assoc($select2Frinds))
+						$select2Frinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `friendship` WHERE `confired` = 1 AND `secondid` = '{$_SESSION['userid']}'");
+						while($frinds2 = mysqli_fetch_assoc($select2Frinds))
 						{
-						$nfrind1 = mysql_query("SELECT * FROM user WHERE id = {$frinds2['firstid']}");
-						$nnfrind2 = mysql_fetch_assoc($nfrind1);
-						$p5 = mysql_query("SELECT * FROM profile WHERE administraedFrom = {$frinds2['firstid']} AND type = 1 ");
-						$p6 = mysql_fetch_assoc($p5);
+						$nfrind1 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$frinds2['firstid']}");
+						$nnfrind2 = mysqli_fetch_assoc($nfrind1);
+						$p5 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$frinds2['firstid']} AND type = 1 ");
+						$p6 = mysqli_fetch_assoc($p5);
 						echo "<p><a href='profile.php?p=" .$p6['id'] ."'>" .$nnfrind2['prename'] ." " .$nnfrind2['lastname'] ."</a></p>";
 						}
 						?>
@@ -184,11 +184,11 @@ if($data['type'] == 1){
 						</div>
 						<div class="panel-body">
 						<?php
-						$select1Profile = mysql_query("SELECT * FROM `likes` WHERE `userID` = '{$_SESSION['userid']}' AND `Type` = '0'");
-						while($frinds8 = mysql_fetch_assoc($select1Profile))
+						$select1Profile = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `likes` WHERE `userID` = '{$_SESSION['userid']}' AND `Type` = '0'");
+						while($frinds8 = mysqli_fetch_assoc($select1Profile))
 						{
-						$nfrind9 = mysql_query("SELECT * FROM profile WHERE id = {$frinds8['pageID']}");
-						$nnfrind9 = mysql_fetch_assoc($nfrind9);
+						$nfrind9 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE id = {$frinds8['pageID']}");
+						$nnfrind9 = mysqli_fetch_assoc($nfrind9);
 						echo "<p><a href='profile.php?p=" .$nnfrind9['id'] ."'>" .$nnfrind9['profileName'] ."</a></p>";
 						}
 						?>
@@ -222,8 +222,8 @@ if($data['type'] == 1){
 				            <b>Name:</b><br>
 				            <input class="form-control" <?php echo $dis1; ?> type="text" name="profiname" style="width:100%" value="<?php echo  $data['profileName']; ?>"><br>
 				            <?php echo $mu ; ?><br>
-				            <textarea class="form-control" name="pi" style="resize:none; width:100%"><?php $selectbox = mysql_query("SELECT * FROM `profile` WHERE id = {$p}");
-						     $selectbox1 = mysql_fetch_assoc($selectbox);
+				            <textarea class="form-control" name="pi" style="resize:none; width:100%"><?php $selectbox = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `profile` WHERE id = {$p}");
+						     $selectbox1 = mysqli_fetch_assoc($selectbox);
 							 $info = $selectbox1['profilInfos'];
 							 $breaks = "<br />";
 							 $text1 = str_ireplace($breaks, "", $info);  

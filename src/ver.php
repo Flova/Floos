@@ -4,8 +4,8 @@ require('config.php');
 //Flees loeschen
 if(isset($_GET['code']))
 {
-		$code = mysql_real_escape_string($_GET['code']);
-		$insert = mysql_query("UPDATE ver SET ver = 1 WHERE code =" . $code);
+		$code = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET['code']);
+		$insert = mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE ver SET ver = 1 WHERE code =" . $code);
 }
 //Weiterleitung
 $host = $_SERVER['HTTP_HOST'];

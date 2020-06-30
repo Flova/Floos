@@ -18,14 +18,14 @@ if(!isset($_SESSION['userid']))
 if(isset($_GET['a']))
 {
 	//Parameter absichern
-	$a = mysql_real_escape_string($_GET['a']);
+	$a = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET['a']);
 	//Datenbankabfrage, ob die Freundschaft bestaetigt werden kann
-	$ismyrequest = mysql_query("SELECT * FROM friendship WHERE secondid = {$_SESSION['userid']} AND confired = 0 AND id = {$a}");
+	$ismyrequest = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM friendship WHERE secondid = {$_SESSION['userid']} AND confired = 0 AND id = {$a}");
 	//Kann sie bestaetigt werden
-	if(mysql_num_rows($ismyrequest) != 0)
+	if(mysqli_num_rows($ismyrequest) != 0)
 	{
 		//Freundschaft bestaetigen
-		$update = mysql_query("UPDATE friendship SET confired = 1 WHERE id = {$a}");
+		$update = mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE friendship SET confired = 1 WHERE id = {$a}");
 		//Weiterleitung, um Parameter zu entfernen
 		$host = $_SERVER['HTTP_HOST'];
 		$uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
@@ -35,7 +35,7 @@ if(isset($_GET['a']))
 	else
 	{
 		//Weiterleitung, um Parameter zu entfernen
-		$update = mysql_query("UPDATE friendship SET confired = 1 WHERE id = {$a}");
+		$update = mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE friendship SET confired = 1 WHERE id = {$a}");
 		$host = $_SERVER['HTTP_HOST'];
 		$uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 		header("Location: http://$host$uri/requerst_anwser.php");
@@ -46,14 +46,14 @@ if(isset($_GET['a']))
 if(isset($_GET['d']))
 {
 	//Parameter absichern
-	$d = mysql_real_escape_string($_GET['d']);
+	$d = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET['d']);
 	//Datenbankabfrage, ob die Freundschaft abgelehnt werden kann
-	$ismyrequest = mysql_query("SELECT * FROM friendship WHERE secondid = {$_SESSION['userid']} AND confired = 0 AND id = {$d}");
+	$ismyrequest = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM friendship WHERE secondid = {$_SESSION['userid']} AND confired = 0 AND id = {$d}");
 	//Kann sie bestaetigt werden
-	if(mysql_num_rows($ismyrequest) != 0)
+	if(mysqli_num_rows($ismyrequest) != 0)
 	{
 		//Freundschaft ablehnen
-		$update = mysql_query("DELETE FROM friendship WHERE id = {$d}");
+		$update = mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM friendship WHERE id = {$d}");
 		//Weiterleitung, um Parameter zu entfernen
 		$host = $_SERVER['HTTP_HOST'];
 		$uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
@@ -63,7 +63,7 @@ if(isset($_GET['d']))
 	else
 	{
 		//Weiterleitung, um Parameter zu entfernen
-		$update = mysql_query("UPDATE friendship SET confired = 1 WHERE id = {$a}");
+		$update = mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE friendship SET confired = 1 WHERE id = {$a}");
 		$host = $_SERVER['HTTP_HOST'];
 		$uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 		header("Location: http://$host$uri/requerst_anwser.php");
@@ -136,22 +136,22 @@ if(isset($_GET['d']))
 						</div>
 						<div class="panel-body">
 				       		<?php 
-							$select1Frinds = mysql_query("SELECT * FROM `friendship` WHERE `confired` = 1 AND `firstid` = '{$_SESSION['userid']}'");
-							while($frinds1 = mysql_fetch_assoc($select1Frinds))
+							$select1Frinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `friendship` WHERE `confired` = 1 AND `firstid` = '{$_SESSION['userid']}'");
+							while($frinds1 = mysqli_fetch_assoc($select1Frinds))
 							{
-							$nfrind = mysql_query("SELECT * FROM user WHERE id = {$frinds1['secondid']}");
-							$nnfrind = mysql_fetch_assoc($nfrind);
-							$p3 = mysql_query("SELECT * FROM profile WHERE administraedFrom = {$frinds1['secondid']} AND type = 1 ");
-							$p4 = mysql_fetch_assoc($p3);
+							$nfrind = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$frinds1['secondid']}");
+							$nnfrind = mysqli_fetch_assoc($nfrind);
+							$p3 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$frinds1['secondid']} AND type = 1 ");
+							$p4 = mysqli_fetch_assoc($p3);
 							echo "<p><a href='profile.php?p=" .$p4['id'] ."'>" .$nnfrind['prename'] ." " .$nnfrind['lastname'] ."</a></p>";
 							}
-							$select2Frinds = mysql_query("SELECT * FROM `friendship` WHERE `confired` = 1 AND `secondid` = '{$_SESSION['userid']}'");
-							while($frinds2 = mysql_fetch_assoc($select2Frinds))
+							$select2Frinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `friendship` WHERE `confired` = 1 AND `secondid` = '{$_SESSION['userid']}'");
+							while($frinds2 = mysqli_fetch_assoc($select2Frinds))
 							{
-							$nfrind1 = mysql_query("SELECT * FROM user WHERE id = {$frinds2['firstid']}");
-							$nnfrind2 = mysql_fetch_assoc($nfrind1);
-							$p5 = mysql_query("SELECT * FROM profile WHERE administraedFrom = {$frinds2['firstid']} AND type = 1 ");
-							$p6 = mysql_fetch_assoc($p5);
+							$nfrind1 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$frinds2['firstid']}");
+							$nnfrind2 = mysqli_fetch_assoc($nfrind1);
+							$p5 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$frinds2['firstid']} AND type = 1 ");
+							$p6 = mysqli_fetch_assoc($p5);
 							echo "<p><a href='profile.php?p=" .$p6['id'] ."'>" .$nnfrind2['prename'] ." " .$nnfrind2['lastname'] ."</a></p>";
 							}
 							?>
@@ -161,11 +161,11 @@ if(isset($_GET['d']))
 							</div>
 							<div class="panel-body">
 							<?php
-							$select1Profile = mysql_query("SELECT * FROM `likes` WHERE `userID` = '{$_SESSION['userid']}' AND `Type` = '0'");
-							while($frinds8 = mysql_fetch_assoc($select1Profile))
+							$select1Profile = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `likes` WHERE `userID` = '{$_SESSION['userid']}' AND `Type` = '0'");
+							while($frinds8 = mysqli_fetch_assoc($select1Profile))
 							{
-							$nfrind9 = mysql_query("SELECT * FROM profile WHERE id = {$frinds8['pageID']}");
-							$nnfrind9 = mysql_fetch_assoc($nfrind9);
+							$nfrind9 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE id = {$frinds8['pageID']}");
+							$nnfrind9 = mysqli_fetch_assoc($nfrind9);
 							echo "<p><a href='profile.php?p=" .$nnfrind9['id'] ."'>" .$nnfrind9['profileName'] ."</a></p>";
 							}
 							?>
@@ -191,11 +191,11 @@ if(isset($_GET['d']))
 	            	<div class="col-md-10">
 			            <h2>Kontaktanfragen</h2>
 			            <?php
-						$select_friedship_requersts = mysql_query("SELECT * FROM  friendship WHERE secondid = {$_SESSION['userid']} AND confired = 0");
-						while($row = mysql_fetch_assoc($select_friedship_requersts))
+						$select_friedship_requersts = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  friendship WHERE secondid = {$_SESSION['userid']} AND confired = 0");
+						while($row = mysqli_fetch_assoc($select_friedship_requersts))
 						{
-								$selct_user_info = mysql_query("SELECT * FROM user WHERE id = {$row['firstid']}");
-								$userdata = mysql_fetch_assoc($selct_user_info);
+								$selct_user_info = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$row['firstid']}");
+								$userdata = mysqli_fetch_assoc($selct_user_info);
 								echo "<div class='panel panel-default'><div class='panel-heading'><b>" . $userdata['prename'] . " " . $userdata['lastname'] . "</b></div><div class='panel-body'>
 										<button onclick=" . '"' ."window.location.href = '" . "requerst_anwser.php?a={$row['id']}" . "';" . '"' . " class='btn btn-primary' type='button'>Best&auml;tigen</button>
 	        							<button onclick=" . '"' ."window.location.href = '" . "requerst_anwser.php?d={$row['id']}" . "';" . '"' . " class='btn btn-default' type='button'>L&ouml;schen</button>

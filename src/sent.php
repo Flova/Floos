@@ -21,7 +21,7 @@ if(isset($_POST['message']) && isset($_POST['secondID']))
 	//Datum und Zeit abfragen
 	$date = date("Y-m-d H:i:s");
 	//Eingeben vor SQL-Injection sichern
-	$pw = mysql_real_escape_string($_POST['message']); 
+	$pw = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['message']); 
                 $pw = make_clickable(htmlspecialchars($pw));
                 $var = array(
                   'ä' => '&auml;',
@@ -32,11 +32,11 @@ if(isset($_POST['message']) && isset($_POST['secondID']))
                   'Ö' => '&Ouml;',
                   'ß' => '&szlig;' );
                   $pw1 = str_replace(array_keys($var), array_values($var), $pw);
-	$uid = mysql_real_escape_string($_SESSION['userid']);
-	$secID = mysql_real_escape_string($_POST['secondID']);
+	$uid = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['userid']);
+	$secID = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['secondID']);
 	
 	//Werte in Datenbank schreiben
-	$insert = mysql_query("INSERT INTO Chat VALUES('','{$uid}','{$secID}','{$pw1}','{$date}','0')");
+	$insert = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO Chat VALUES('','{$uid}','{$secID}','{$pw1}','{$date}','0')");
 	//Weiterleitung
     $host = $_SERVER['HTTP_HOST'];
     $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');

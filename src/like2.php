@@ -19,12 +19,12 @@ else
 	date_default_timezone_set("Europe/Berlin");
 	//Bezieht sich die Serverzeit unter brücksichtigung der Zeitzone
 	$date = date("Y-m-d H:i:s");
-	$homeid = mysql_query("SELECT * FROM  profile WHERE administraedFrom = {$_SESSION['userid']} AND type = 1");
-	$homeid1 = mysql_fetch_assoc($homeid);
-	$uid = mysql_real_escape_string($homeid1['id']);
-	$uid1 = mysql_real_escape_string($_SESSION['userid']);	
+	$homeid = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  profile WHERE administraedFrom = {$_SESSION['userid']} AND type = 1");
+	$homeid1 = mysqli_fetch_assoc($homeid);
+	$uid = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $homeid1['id']);
+	$uid1 = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['userid']);	
 	//Schreibt die Werte in die Datenbank
-	$insert = mysql_query("INSERT INTO pinnwand VALUES('','hat folgenden Link geteielt:<br><a href='{$link}'>{$link}</a>','{$uid1}','{$uid}','{$date}')");
+	$insert = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO pinnwand VALUES('','hat folgenden Link geteielt:<br><a href='{$link}'>{$link}</a>','{$uid1}','{$uid}','{$date}')");
     exit;
 	}
  ?>

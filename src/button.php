@@ -83,17 +83,17 @@ if(!isset($_SESSION['userid']))
 	date_default_timezone_set("Europe/Berlin");
 	//Bezieht sich die Serverzeit unter brücksichtigung der Zeitzone
 	$date = date("Y-m-d H:i:s");
-	$homeid = mysql_query("SELECT * FROM  profile WHERE administraedFrom = {$_SESSION['userid']} AND type = 1");
-	$homeid1 = mysql_fetch_assoc($homeid);
-	$uid = mysql_real_escape_string($homeid1['id']);
-	$uid1 = mysql_real_escape_string($_SESSION['userid']);
-	$nfrind1 = mysql_query("SELECT * FROM user WHERE id = {$uid1}");
-	$nnfrind2 = mysql_fetch_assoc($nfrind1);
-	$link1 = mysql_real_escape_string($_POST['link']);
+	$homeid = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  profile WHERE administraedFrom = {$_SESSION['userid']} AND type = 1");
+	$homeid1 = mysqli_fetch_assoc($homeid);
+	$uid = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $homeid1['id']);
+	$uid1 = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['userid']);
+	$nfrind1 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$uid1}");
+	$nnfrind2 = mysqli_fetch_assoc($nfrind1);
+	$link1 = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['link']);
 	$text = $nnfrind2['prename'] . " " . $nnfrind2['lastname'] . " hat folgenden Link geteielt:<br><a href='" . $link . "'>" . $link . "</a>";
-	$text = mysql_real_escape_string($text);
+	$text = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $text);
 	//Schreibt die Werte in die Datenbank
-	$insert = mysql_query("INSERT INTO pinnwand VALUES('','{$text}','{$uid1}','{$uid}','{$date}')");
+	$insert = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO pinnwand VALUES('','{$text}','{$uid1}','{$uid}','{$date}')");
 	//Weiterleitung
   $host = $_SERVER['HTTP_HOST'];
   $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');

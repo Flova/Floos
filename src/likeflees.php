@@ -7,15 +7,15 @@ session_start();
 require_once('config.php');
 
 	//Parameter absichern vor SQL_Injection
-	$f = mysql_real_escape_string($_GET['f']);
+	$f = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET['f']);
 
 	//Flees laden
-	$selctFLData = mysql_query("SELECT * FROM  pinnwand WHERE id = '{$f}'");
-	$FLData = mysql_fetch_assoc($selctFLData);
+	$selctFLData = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  pinnwand WHERE id = '{$f}'");
+	$FLData = mysqli_fetch_assoc($selctFLData);
 
 	//Profil finden
-	$userinfos = mysql_query("SELECT * FROM profile WHERE id = '" . $FLData['postOnUserID'] . "'");
-	$userinfos = mysql_fetch_assoc($userinfos);
+	$userinfos = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE id = '" . $FLData['postOnUserID'] . "'");
+	$userinfos = mysqli_fetch_assoc($userinfos);
 
 	//Zeitzone festlegene
 	date_default_timezone_set("Europe/Berlin");
@@ -23,15 +23,15 @@ require_once('config.php');
 	$date = date("Y-m-d H:i:s");
 
 	//User2 finden
-	$user2infos = mysql_query("SELECT * FROM profile WHERE administraedFrom = '" . $_SESSION['userid'] . "' AND type = '1'");
-	$user2infos = mysql_fetch_assoc($user2infos);
+	$user2infos = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = '" . $_SESSION['userid'] . "' AND type = '1'");
+	$user2infos = mysqli_fetch_assoc($user2infos);
 
 	//content
-	$content = mysql_real_escape_string("mag diesen Flees auf der Seite <b>" . $userinfos['profileName'] . ":</b><br><br>" . $FLData['pwcontent']);
+	$content = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], "mag diesen Flees auf der Seite <b>" . $userinfos['profileName'] . ":</b><br><br>" . $FLData['pwcontent']);
 
 
 	//Like in die Datenbank schreiben
-	$insert = mysql_query("INSERT INTO pinnwand VALUES ('','" . $content . "','" . $_SESSION['userid'] . "','" . $user2infos['id'] . "','" . $date . "')");
+	$insert = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO pinnwand VALUES ('','" . $content . "','" . $_SESSION['userid'] . "','" . $user2infos['id'] . "','" . $date . "')");
 
 	//Weiterleitung
 	$host = $_SERVER['HTTP_HOST'];

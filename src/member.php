@@ -10,11 +10,11 @@ require_once('config.php');
 if(isset($_GET['p']))
 {
 	//Variable aufbebreiten und in die Datenbank damit 
-	$p = mysql_real_escape_string($_GET['p']);
-	$user = mysql_real_escape_string($_SESSION['userid']);
-	$lock = mysql_query("SELECT * FROM `locked` WHERE `pageId` = {$p} AND ok = 1");
-	if(mysql_num_rows($lock) != 0) {
-		$insert = mysql_query("INSERT INTO `locked` VALUES('','{$p}','{$user}','0')");
+	$p = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET['p']);
+	$user = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['userid']);
+	$lock = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `locked` WHERE `pageId` = {$p} AND ok = 1");
+	if(mysqli_num_rows($lock) != 0) {
+		$insert = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO `locked` VALUES('','{$p}','{$user}','0')");
 		$host = $_SERVER['HTTP_HOST'];
 		$uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 		header("Location: http://$host$uri/profile.php?p=" . $p);

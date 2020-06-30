@@ -16,8 +16,8 @@ if(!isset($_SESSION['userid']))
             exit;
 }
 //Guckt, ob Freundschaftsanfragen vorhanden sind
-$select_friedship_requersts = mysql_query("SELECT * FROM  friendship WHERE secondid = {$_SESSION['userid']} AND confired = 0");
-$open_friendship_request = mysql_num_rows($select_friedship_requersts);
+$select_friedship_requersts = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  friendship WHERE secondid = {$_SESSION['userid']} AND confired = 0");
+$open_friendship_request = mysqli_num_rows($select_friedship_requersts);
 //Gibt einen Link aus,  falls Anfragen vorhanden sind
 if($open_friendship_request > 0)
 {
@@ -38,12 +38,12 @@ if($open_friendship_request > 0)
             <div id="navi"></div>
             <div id="main-content">
 				<?php
-				$s = mysql_real_escape_string($_GET['s']);
-                $selctSData = mysql_query("SELECT `id` FROM `profile` WHERE `profileName` LIKE '%{$s}%'");
-				while($pwData = mysql_fetch_assoc($selctSData))
+				$s = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET['s']);
+                $selctSData = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT `id` FROM `profile` WHERE `profileName` LIKE '%{$s}%'");
+				while($pwData = mysqli_fetch_assoc($selctSData))
 				{
-					$selectPostFrom = mysql_query("SELECT * FROM user WHERE id = {$pwData['userid']}");
-					$PostUserName = mysql_fetch_assoc($selectPostFrom);
+					$selectPostFrom = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$pwData['userid']}");
+					$PostUserName = mysqli_fetch_assoc($selectPostFrom);
 					echo "<a href='profile.php?p=" .$PostUserName['id'] ."'>" .$PostUserName['prename'] ." " .$PostUserName['lastname'] ."</a><br>";
 				}
 				 ?> </div>

@@ -14,9 +14,9 @@ if(!isset($_SESSION['userid']))
 }
 $id = $_GET['id'];
 
-$result = mysql_query("SELECT * FROM `profileimages` WHERE 	userid = " . $id);
+$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `profileimages` WHERE 	userid = " . $id);
 
-$row=mysql_fetch_assoc($result);
+$row=mysqli_fetch_assoc($result);
 
 header("Content-type: {$row['imgType']}");
 

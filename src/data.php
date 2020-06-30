@@ -7,7 +7,7 @@ else
 
 require_once('classes/CMySQL.php');
 
-$sParam = $GLOBALS['MySQL']->escape($_GET['q']); // escaping external data
+$sParam = $GLOBALS['mysql']->escape($_GET['q']); // escaping external data
 if (! $sParam) exit;
 
 switch ($_GET['mode']) {
@@ -29,7 +29,7 @@ switch ($_GET['mode']) {
         break;
     case 'sql': // using database as source of data
         $sRequest = "SELECT `country_name` FROM `s85_countries` WHERE `country_name` LIKE '%{$sParam}%' ORDER BY `country_code`";
-        $aItemInfo = $GLOBALS['MySQL']->getAll($sRequest);
+        $aItemInfo = $GLOBALS['mysql']->getAll($sRequest);
         foreach ($aItemInfo as $aValues) {
             echo $aValues['country_name'] . "\n";
         }

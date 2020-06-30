@@ -23,22 +23,22 @@ if(isset($_POST['pinnwand']) && $_POST['pinnwand'] != "" && $_POST['pinnwand'] !
 	//Bezieht sich die Serverzeit unter brücksichtigung der Zeitzone
 	$date = date("Y-m-d H:i:s");
 	//Bereitet die Variablen für die Datenbank auf
-	$pw = mysql_real_escape_string($_POST['pinnwand']);
-	$uid = mysql_real_escape_string($_SESSION['userid']);
+	$pw = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['pinnwand']);
+	$uid = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['userid']);
 	//Schreibt die Werte in die Datenbank
-	$insert = mysql_query("INSERT INTO pinnwand VALUES('','{$pw}','{$uid}','{$uid}','{$date}')");
+	$insert = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO pinnwand VALUES('','{$pw}','{$uid}','{$uid}','{$date}')");
 }
 //Guckt, ob Freundschaftsanfragen vorhanden sind
-$select_friedship_requersts = mysql_query("SELECT * FROM  friendship WHERE secondid = {$_SESSION['userid']} AND confired = 0");
-$open_friendship_request = mysql_num_rows($select_friedship_requersts);
+$select_friedship_requersts = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  friendship WHERE secondid = {$_SESSION['userid']} AND confired = 0");
+$open_friendship_request = mysqli_num_rows($select_friedship_requersts);
 //Gibt einen Link aus,  falls Anfragen vorhanden sind
 if($open_friendship_request > 0)
 {
 	$friendship_request = '<a href="requerst_anwser.php">'. $open_friendship_request.' Freundschaftsanfragen</a> | ';	
 }
 //Liest die ID des Profiles aus
-$selectUserProfile = mysql_query("SELECT * FROM profile WHERE administraedFrom = {$_SESSION['userid']} AND type = 1");
-$userProfile = mysql_fetch_assoc($selectUserProfile);
+$selectUserProfile = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$_SESSION['userid']} AND type = 1");
+$userProfile = mysqli_fetch_assoc($selectUserProfile);
 ?>
 <html>
 <head>
@@ -57,9 +57,9 @@ $userProfile = mysql_fetch_assoc($selectUserProfile);
             <b>Meine Freunde</b>
             <div style="padding-top:10;">
 			<?php 
-			$selectAllFrinds = mysql_query("SELECT `firstid`, `secondid` FROM `friendship` WHERE `confired` = 1 AND (`firstid` = '{$_SESSION['userid']}' OR `secondid` = '{$_SESSION['userid']}')");
+			$selectAllFrinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT `firstid`, `secondid` FROM `friendship` WHERE `confired` = 1 AND (`firstid` = '{$_SESSION['userid']}' OR `secondid` = '{$_SESSION['userid']}')");
 			$frinds = array();
-			while($frindsselekted = mysql_fetch_assoc($selectAllFrinds))
+			while($frindsselekted = mysqli_fetch_assoc($selectAllFrinds))
 			{
 			if($frindsselekted['firstid'] == $_SESSION['userid'])
 			{
@@ -71,8 +71,8 @@ $userProfile = mysql_fetch_assoc($selectUserProfile);
 			}
 			}
 			$idsToSelect = implode(",",$frinds);
-			$frindsselekted2 = mysql_query("SELECT `id`, `profileName` FROM `profile` WHERE `type` = 1 AND `id` IN '{$idsToSelect}'");
-			while($frinds = mysql_fetch_assoc($frindsselekted2))
+			$frindsselekted2 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT `id`, `profileName` FROM `profile` WHERE `type` = 1 AND `id` IN '{$idsToSelect}'");
+			while($frinds = mysqli_fetch_assoc($frindsselekted2))
 				{
 					echo $frinds['profileName'];
 				}
@@ -89,11 +89,11 @@ $userProfile = mysql_fetch_assoc($selectUserProfile);
 			<a>Fleeses</a>
 			<?php
 				//Pinwandausgabe
-				$selctPWData = mysql_query("SELECT * FROM  pinnwand WHERE postOnUserID = '{$_SESSION['userid']}' ORDER BY poston DESC  ");
-				while($pwData = mysql_fetch_assoc($selctPWData))
+				$selctPWData = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  pinnwand WHERE postOnUserID = '{$_SESSION['userid']}' ORDER BY poston DESC  ");
+				while($pwData = mysqli_fetch_assoc($selctPWData))
 				{
-					$selectPostFrom = mysql_query("SELECT * FROM user WHERE id = {$pwData['userid']}");
-					$PostUserName = mysql_fetch_assoc($selectPostFrom);
+					$selectPostFrom = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$pwData['userid']}");
+					$PostUserName = mysqli_fetch_assoc($selectPostFrom);
 					echo "<a href='profile.php?p=" .$PostUserName['id'] ."'>" .$PostUserName['prename'] ." " .$PostUserName['lastname'] ."</a><br>";
 					echo $pwData['pwcontent'] ."<hr>";
 				}

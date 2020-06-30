@@ -20,16 +20,16 @@ if(!isset($_SESSION['userid']))
 //Verarbeitung des Submitbuttons
 if(isset($_POST['submit']))
 {
-  $select1Frinds = mysql_query("SELECT * FROM `friendship` WHERE `confired` = 1 AND `firstid` = '{$_SESSION['userid']}'");
-  while($frinds1 = mysql_fetch_assoc($select1Frinds))
+  $select1Frinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `friendship` WHERE `confired` = 1 AND `firstid` = '{$_SESSION['userid']}'");
+  while($frinds1 = mysqli_fetch_assoc($select1Frinds))
   {
     if(isset($_POST[$frinds1['secondid']]))
       {
 
        }
   }
-  $select2Frinds = mysql_query("SELECT * FROM `friendship` WHERE `confired` = 1 AND `secondid` = '{$_SESSION['userid']}'");
-  while($frinds2 = mysql_fetch_assoc($select2Frinds))
+  $select2Frinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `friendship` WHERE `confired` = 1 AND `secondid` = '{$_SESSION['userid']}'");
+  while($frinds2 = mysqli_fetch_assoc($select2Frinds))
   {
  
  }
@@ -103,22 +103,22 @@ if(isset($_POST['submit']))
           </div>
           <div class="panel-body">
                 <?php 
-            $select1Frinds = mysql_query("SELECT * FROM `friendship` WHERE `confired` = 1 AND `firstid` = '{$_SESSION['userid']}'");
-            while($frinds1 = mysql_fetch_assoc($select1Frinds))
+            $select1Frinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `friendship` WHERE `confired` = 1 AND `firstid` = '{$_SESSION['userid']}'");
+            while($frinds1 = mysqli_fetch_assoc($select1Frinds))
             {
-            $nfrind = mysql_query("SELECT * FROM user WHERE id = {$frinds1['secondid']}");
-            $nnfrind = mysql_fetch_assoc($nfrind);
-            $p3 = mysql_query("SELECT * FROM profile WHERE administraedFrom = {$frinds1['secondid']} AND type = 1 ");
-            $p4 = mysql_fetch_assoc($p3);
+            $nfrind = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$frinds1['secondid']}");
+            $nnfrind = mysqli_fetch_assoc($nfrind);
+            $p3 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$frinds1['secondid']} AND type = 1 ");
+            $p4 = mysqli_fetch_assoc($p3);
             echo "<p><a href='profile.php?p=" .$p4['id'] ."'>" .$nnfrind['prename'] ." " .$nnfrind['lastname'] ."</a></p>";
             }
-            $select2Frinds = mysql_query("SELECT * FROM `friendship` WHERE `confired` = 1 AND `secondid` = '{$_SESSION['userid']}'");
-            while($frinds2 = mysql_fetch_assoc($select2Frinds))
+            $select2Frinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `friendship` WHERE `confired` = 1 AND `secondid` = '{$_SESSION['userid']}'");
+            while($frinds2 = mysqli_fetch_assoc($select2Frinds))
             {
-            $nfrind1 = mysql_query("SELECT * FROM user WHERE id = {$frinds2['firstid']}");
-            $nnfrind2 = mysql_fetch_assoc($nfrind1);
-            $p5 = mysql_query("SELECT * FROM profile WHERE administraedFrom = {$frinds2['firstid']} AND type = 1 ");
-            $p6 = mysql_fetch_assoc($p5);
+            $nfrind1 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$frinds2['firstid']}");
+            $nnfrind2 = mysqli_fetch_assoc($nfrind1);
+            $p5 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$frinds2['firstid']} AND type = 1 ");
+            $p6 = mysqli_fetch_assoc($p5);
             echo "<p><a href='profile.php?p=" .$p6['id'] ."'>" .$nnfrind2['prename'] ." " .$nnfrind2['lastname'] ."</a></p>";
             }
             ?>
@@ -128,11 +128,11 @@ if(isset($_POST['submit']))
             </div>
             <div class="panel-body">
             <?php
-            $select1Profile = mysql_query("SELECT * FROM `likes` WHERE `userID` = '{$_SESSION['userid']}' AND `Type` = '0'");
-            while($frinds8 = mysql_fetch_assoc($select1Profile))
+            $select1Profile = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `likes` WHERE `userID` = '{$_SESSION['userid']}' AND `Type` = '0'");
+            while($frinds8 = mysqli_fetch_assoc($select1Profile))
             {
-            $nfrind9 = mysql_query("SELECT * FROM profile WHERE id = {$frinds8['pageID']}");
-            $nnfrind9 = mysql_fetch_assoc($nfrind9);
+            $nfrind9 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE id = {$frinds8['pageID']}");
+            $nnfrind9 = mysqli_fetch_assoc($nfrind9);
             echo "<p><a href='profile.php?p=" .$nnfrind9['id'] ."'>" .$nnfrind9['profileName'] ."</a></p>";
             }
             ?>
@@ -168,18 +168,18 @@ if(isset($_POST['submit']))
                     <input type="text" class="form-control" name="profiname" style="width:100%" value="Florian Vahl"><br>
                     <?php 
 
-                      $select1Frinds = mysql_query("SELECT * FROM `friendship` WHERE `confired` = 1 AND `firstid` = '{$_SESSION['userid']}'");
-                      while($frinds1 = mysql_fetch_assoc($select1Frinds))
+                      $select1Frinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `friendship` WHERE `confired` = 1 AND `firstid` = '{$_SESSION['userid']}'");
+                      while($frinds1 = mysqli_fetch_assoc($select1Frinds))
                       {
-                      $nfrind = mysql_query("SELECT * FROM user WHERE id = {$frinds1['secondid']}");
-                      $nnfrind = mysql_fetch_assoc($nfrind);
+                      $nfrind = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$frinds1['secondid']}");
+                      $nnfrind = mysqli_fetch_assoc($nfrind);
                       echo  '<label class="checkbox"><input type="checkbox" name="' . $nnfrind['id'] .'"  value="1">' .$nnfrind['prename'] ." " .$nnfrind['lastname'] ."</label>";
                       }
-                      $select2Frinds = mysql_query("SELECT * FROM `friendship` WHERE `confired` = 1 AND `secondid` = '{$_SESSION['userid']}'");
-                      while($frinds2 = mysql_fetch_assoc($select2Frinds))
+                      $select2Frinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `friendship` WHERE `confired` = 1 AND `secondid` = '{$_SESSION['userid']}'");
+                      while($frinds2 = mysqli_fetch_assoc($select2Frinds))
                       {
-                      $nfrind1 = mysql_query("SELECT * FROM user WHERE id = {$frinds2['firstid']}");
-                      $nnfrind2 = mysql_fetch_assoc($nfrind1);
+                      $nfrind1 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$frinds2['firstid']}");
+                      $nnfrind2 = mysqli_fetch_assoc($nfrind1);
                       echo  '<label class="checkbox"><input type="checkbox" name="' . $nnfrind2['id'] .'"  value="1">' .$nnfrind2['prename'] ." " .$nnfrind2['lastname'] ."</label>";
                       }
 

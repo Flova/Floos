@@ -15,13 +15,13 @@ require('config.php');
 //Flees loeschen
 if(isset($_GET['f']))
 {
-	$f = mysql_real_escape_string($_GET['f']);
-	$post = mysql_query("SELECT * FROM `pinnwand` WHERE `id` =" . $f);
-	$post = mysql_fetch_assoc($post);
-	$proID = mysql_query("SELECT * FROM profile WHERE id = " . $post['postOnUserID']);
-	$proID = mysql_fetch_assoc($proID);
+	$f = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET['f']);
+	$post = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `pinnwand` WHERE `id` =" . $f);
+	$post = mysqli_fetch_assoc($post);
+	$proID = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE id = " . $post['postOnUserID']);
+	$proID = mysqli_fetch_assoc($proID);
 	if ($proID['administraedFrom'] == $_SESSION['userid']) {
- 		$del = mysql_query("DELETE FROM pinnwand WHERE id = '" . $f . "'");
+ 		$del = mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM pinnwand WHERE id = '" . $f . "'");
  		//Weiterleitung
  		$host = $_SERVER['HTTP_HOST'];
  		$uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');

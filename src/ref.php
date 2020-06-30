@@ -18,14 +18,14 @@ if(!isset($_SESSION['userid']))
 //Chatausgabe
 $myId = $_SESSION['userid'];
 $secId = $_GET['p'];
-$selctCHData = mysql_query("SELECT * FROM `Chat` WHERE ( `firstID` = " . $myId . " AND `secondID` = " . $secId . " ) OR ( `firstID` = " . $secId . " AND `secondID` = " . $myId . " ) ORDER BY time DESC LIMIT 0 , 50 ");
-while($CHData = mysql_fetch_assoc($selctCHData))
+$selctCHData = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `Chat` WHERE ( `firstID` = " . $myId . " AND `secondID` = " . $secId . " ) OR ( `firstID` = " . $secId . " AND `secondID` = " . $myId . " ) ORDER BY time DESC LIMIT 0 , 50 ");
+while($CHData = mysqli_fetch_assoc($selctCHData))
 {
-	$selectsmFrom = mysql_query("SELECT * FROM user WHERE id = {$CHData['firstID']}");
-	$smUserName = mysql_fetch_assoc($selectsmFrom);
+	$selectsmFrom = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = {$CHData['firstID']}");
+	$smUserName = mysqli_fetch_assoc($selectsmFrom);
 	echo "<b>" . $smUserName['prename'] . " " . $smUserName['lastname']  . ":</b> " . $CHData['message'] . "<br>";
 }
-$sq = mysql_query("UPDATE `Chat` SET `read` = 1 WHERE `secondID` = " . $_SESSION['userid'] . " AND `firstID` = " . $secId );
+$sq = mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE `Chat` SET `read` = 1 WHERE `secondID` = " . $_SESSION['userid'] . " AND `firstID` = " . $secId );
 echo '</body></html>';
 ?>
 

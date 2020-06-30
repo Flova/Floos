@@ -7,9 +7,9 @@ session_start();
 require_once('config.php');
 //Anmeldung mit der App?
 if (isset($_COOKIE["userid"])) {
-    $selectUserId = mysql_query("SELECT * FROM user WHERE id = '". $_COOKIE["userid"] . "'");
-    if (mysql_num_rows($selectUserId) > 0) {
-        $selectUserId = mysql_fetch_assoc($selectUserId);
+    $selectUserId = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE id = '". $_COOKIE["userid"] . "'");
+    if (mysqli_num_rows($selectUserId) > 0) {
+        $selectUserId = mysqli_fetch_assoc($selectUserId);
         if ($_COOKIE["pw"] == $selectUserId['password']) {
             $userip = $_SERVER['REMOTE_ADDR'];
             $userid = $_COOKIE["userid"];
@@ -17,8 +17,8 @@ if (isset($_COOKIE["userid"])) {
             date_default_timezone_set("Europe/Berlin");
             //Datum und Zeit abfragen
             $date = date("Y-m-d H:i:s");
-            
-            $insert = mysql_query("INSERT INTO loginlog VALUES ('','{$userid}','{$userip}','{$date}')");
+
+            $insert = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO loginlog VALUES ('','{$userid}','{$userip}','{$date}')");
             $_SESSION['userid'] = $userid;
              //Weiterleitung
             $host = $_SERVER['HTTP_HOST'];
@@ -34,15 +34,15 @@ $password = $_POST['password'];
 //Sind alle Felder ausgef�llt
 if($email != "" && $password != "") {
 	//Absichern der Logineingaben, zum Schutz vor SQL-Injection
-    $email = mysql_real_escape_string($email);
+    $email = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $email);
 	//Verschluesseln des Passwortes, um die Datenbankabfrage durchzufuehren
     $password = md5($password);
     //Daten aus Datenbanak holen
-    $selectUserData = mysql_query("SELECT * FROM user WHERE email = '". $email . "'");
+    $selectUserData = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM user WHERE email = '". $email . "'");
     //Ist der Benutzer �berhaupt vorhanden?
-    if(mysql_num_rows($selectUserData) > 0){
+    if(mysqli_num_rows($selectUserData) > 0){
         //Aufarbeiten der Datenbankwerte
-        $dbData = mysql_fetch_assoc($selectUserData);
+        $dbData = mysqli_fetch_assoc($selectUserData);
 		//Ist das eingengeben Passwort gleich dem Datenbankpasswort
         if($dbData['password'] == $password){
 			//Speichern der Logindaten im Log
@@ -52,8 +52,8 @@ if($email != "" && $password != "") {
             date_default_timezone_set("Europe/Berlin");
             //Datum und Zeit abfragen
             $date = date("Y-m-d H:i:s");
-            
-            $insert = mysql_query("INSERT INTO loginlog VALUES ('','{$userid}','{$userip}','{$date}')");
+
+            $insert = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO loginlog VALUES ('','{$userid}','{$userip}','{$date}')");
             $_SESSION['userid'] = $userid;
             //Wenn der user die App nutzt cookie loeschen
             if(isset($_GET['app'])){
@@ -78,13 +78,13 @@ if($email != "" && $password != "") {
      	$host = $_SERVER['HTTP_HOST'];
         $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
         header("Location: http://$host$uri/index.php?f=1a");
-        exit;   
+        exit;
     }
 }
 else{
    $host = $_SERVER['HTTP_HOST'];
    $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-   header("Location: http://$host$uri/index.php?f=1");
+   echo("<script type='text/javascrip'>location.href = '$host$uri/index.php?f=1';</script>");
    exit;
 }
 ?>

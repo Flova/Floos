@@ -9,9 +9,9 @@ require_once('config.php');
 if(isset($_GET['p']))
 {
 	//Parameter absichern vor SQL_Injection
-	$p = mysql_real_escape_string($_GET['p']);
+	$p = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET['p']);
 	//Like in die Datenbank schreiben
-	$insert = mysql_query("INSERT INTO likes VALUES('','{$p}','{$_SESSION['userid']}','')");
+	$insert = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO likes VALUES('','{$p}','{$_SESSION['userid']}','')");
 	//Weiterleitung zum Profil
 	$host = $_SERVER['HTTP_HOST'];
 	$uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
