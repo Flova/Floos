@@ -179,7 +179,7 @@ if($open_friendship_request > 0)
                 &copy; Florian Vahl &amp; Tyll Peters
                 <br><br>
                 <a href="imrpessum.html">Impressum</a>
-                <a style="padding-left:30px" href="aboutus.html">&Uuml;ber uns</a>
+                <a style="padding-left:30px" href="about_us.html">&Uuml;ber uns</a>
             </p>
         </div>
     </div>
