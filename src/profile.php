@@ -52,10 +52,10 @@ if(isset($_POST['pinnwand']) && $_POST['pinnwand'] != "" && $_POST['pinnwand'] !
                   'ö' => '&ouml;',
                   'Ö' => '&Ouml;',
                   'ß' => '&szlig;' );
-                  $pw1 = str_replace(array_keys($var), array_values($var), $pw); 
+                  $pw1 = str_replace(array_keys($var), array_values($var), $pw);
 	$uid = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['userid']);
 	$postOnID = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['profileID']);
-	
+
 	//Werte in Datenbank schreiben
 	$insert = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO pinnwand VALUES('','{$pw1}','{$uid}','{$postOnID}','{$date}')");
 }
@@ -84,13 +84,13 @@ if(isset($_GET['p']))
 	    $homeid1 = mysqli_fetch_assoc($homeid);
 		if($user_data['type'] == 1)
 		{
-		    
+
 		    $paopr = "<b>&Uuml;ber mich</b>";
 		    $type1 = "1";
-		    
-			
+
+
 			if($homeid1['id'] != $p)
-		    { 
+		    {
 			$is_friendship = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  friendship WHERE (firstid = {$_SESSION['userid']} OR secondid = {$_SESSION['userid']}) AND (firstid = {$user_data['administraedFrom']} OR secondid = {$user_data['administraedFrom']})");
 			if(mysqli_num_rows($is_friendship) != 0)
 			{
@@ -142,7 +142,7 @@ if(isset($_GET['p']))
 					}elseif ($n_like == 1) {
 						$frindlink = 'Du magst diese Seite';
 					}
-					
+
 			}
 			//Gefaellt einen nicht
 			else
@@ -158,9 +158,9 @@ if(isset($_GET['p']))
 		}
 		else
 		{
-		$frindlink = 'Fehler: <b><br>FehlerId = 222 <br> Profil nicht vorhanden<br><a href="serach.php">Profil Suchen</a> <br></b>';	
+		$frindlink = 'Fehler: <b><br>FehlerId = 222 <br> Profil nicht vorhanden<br><a href="serach.php">Profil Suchen</a> <br></b>';
 		}
-	
+
 }
 }
 //Guckt, ob Freundschaftsanfragen vorhanden sind
@@ -169,7 +169,7 @@ $open_friendship_request = mysqli_num_rows($select_friedship_requersts);
 //Gibt einen Link aus,  falls Anfragen vorhanden sind
 if($open_friendship_request > 0)
 {
-	$friendship_request = '<a href="requerst_anwser.php">'. $open_friendship_request.' Kontaktanfrage(n)</a>';	
+	$friendship_request = '<a href="requerst_anwser.php">'. $open_friendship_request.' Kontaktanfrage(n)</a>';
 }
 
 //Besuch in Datenbank notieren
@@ -201,7 +201,7 @@ if(mysqli_num_rows($loadantraege) != 0) {
 
     <link href="designImages/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="floos_logo.png">
-	
+
     <script src="designImages/js/ie-emulation-modes-warning.js"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -218,7 +218,7 @@ if(mysqli_num_rows($loadantraege) != 0) {
   	<meta http-equiv="expires" content="0">
 </head>
 <body>
-    <div class="container bs-docs-container" id="root"> 
+    <div class="container bs-docs-container" id="root">
     	<div role="navigation" style="background-color:#02628a;" class="navbar navbar-inverse navbar-fixed-top">
                 <div class="container">
                 		   <img style="height:47px; width:auto; float:left; margin-right:10px;" src="designImages/floos_logo.png">
@@ -248,7 +248,7 @@ if(mysqli_num_rows($loadantraege) != 0) {
                             	 <a href="home.php">Home</a>
                             </li>
                             <li>
-                              <a href="logout.php">Logout</a> 
+                              <a href="logout.php">Logout</a>
                             </li>
                           </ul>
                        </nav>
@@ -261,7 +261,7 @@ if(mysqli_num_rows($loadantraege) != 0) {
 				            	<b>Meine Kontakte</b>
 						</div>
 						<div class="panel-body">
-				       		<?php 
+				       		<?php
 							$select1Frinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `friendship` WHERE `confired` = 1 AND `firstid` = '{$_SESSION['userid']}'");
 							while($frinds1 = mysqli_fetch_assoc($select1Frinds))
 							{
@@ -300,7 +300,7 @@ if(mysqli_num_rows($loadantraege) != 0) {
 								<b>Optionen</b>
 							</div>
 							<div class="panel-body">
-								<p>	
+								<p>
 									Neue
 									<a href="creat_page.php">
 										Seite
@@ -316,7 +316,7 @@ if(mysqli_num_rows($loadantraege) != 0) {
 		            </div>
 		            <div class="col-md-10" style="padding-left:5; background-color:#e9e9e9;">
 			            <div class="col-md-12">
-				            <h2><?php 
+				            <h2><?php
 				            $ver = '<a href="#" data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-ok-circle" style="margin-left:10px;font-size: 0.5em;"></span></a>
 				            <!-- Modal -->
 							<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -335,12 +335,12 @@ if(mysqli_num_rows($loadantraege) != 0) {
 							    </div>
 							  </div>
 							</div>';
-				            $ver2 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM ver WHERE userId = " . $selcte_user_info1['id']);
+							$ver2 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM ver WHERE userId = " . $selcte_user_info1['id']);
 							$ver2 = mysqli_fetch_assoc($ver2);
 				            if($ver2['ver'] == 1) {
 				            	$ver1 = $ver;
 				            }
-				            echo $name . $ver1; 
+				            echo $name . $ver1;
 				            ?></h2>
 				            <form action="profile.php?p=<?php echo $p ?>" method="post">
 					            <input class="form-control"  type="text" value="An die Flooswall fleesen" name="pinnwand" style="width:100%;" onFocus="if(this.value == 'An die Flooswall fleesen') this.value = ''" onBlur="if(this.value == '') this.value = 'An die Flooswall fleesen'"/>
@@ -348,7 +348,7 @@ if(mysqli_num_rows($loadantraege) != 0) {
 				            </form>
 				        </div>
 				        <div class="col-md-6 hidden-lg hidden-md" >
-				        	<?php 
+				        	<?php
 				        	echo $annehmen;
 				        	if($read_ok == "ok") {
 							$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `profileimages` WHERE 	userid = " . $_GET['p']);
@@ -360,7 +360,7 @@ if(mysqli_num_rows($loadantraege) != 0) {
 
 							?>
 		                	<div class='panel panel-default'>
-								<?php 	
+								<?php
 								if($read_ok == "ok") {
 								echo "<div class='panel-heading'>" . $paopr;
 								//Holt sich Werte des Aktuellen Nutzers
@@ -461,11 +461,11 @@ if(mysqli_num_rows($loadantraege) != 0) {
 								}
 								$id2 = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $homeid1['id']);
 								if ($user_data['administraedFrom'] == $_SESSION['userid']) {
-	
+
 										$admin = "<li><a href='delflees.php?f=" . $pwData['id'] . "'>
 		    							L&ouml;schen
 		    							</a></li>";
-	
+
 								}
 		    					echo "<div class='panel panel-default'><div class='panel-heading'><a name='" . $pwData['id'] . "' href='profile.php?p=" . $id2 ."'>" .$PostUserName['prename'] ." " .$PostUserName['lastname'] ."</a>
 		    					<div style='float:right'>
@@ -506,7 +506,7 @@ if(mysqli_num_rows($loadantraege) != 0) {
 						?>
 		                </div>
 						<div class="col-md-6 hidden-xs hidden-sm" >
-							<?php 
+							<?php
 							echo $annehmen;
 							if($read_ok == "ok") {
 							$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `profileimages` WHERE 	userid = " . $_GET['p']);
@@ -536,7 +536,7 @@ if(mysqli_num_rows($loadantraege) != 0) {
 									<?php if($read_ok == "ok") { echo $frindlink; } ?>
 								</div>
 							</div>
-							<?php 
+							<?php
 								if($read_ok == "ok") {
 								echo $chatlink;
 								if($type1 == "1")
@@ -588,7 +588,7 @@ if(mysqli_num_rows($loadantraege) != 0) {
 													<button data-target="#myModal" data-toggle="modal" class="btn btn-default">
 													  	Widget erstellen
 													</button>
-												
+
 													<!-- Modal -->
 													<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" style="display: none;">
 													 	<div class="modal-dialog">
@@ -628,5 +628,5 @@ if(mysqli_num_rows($loadantraege) != 0) {
     	</div>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 	<script src="designImages/js/bootstrap.js"></script>
-</body>    
+</body>
 </html>

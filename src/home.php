@@ -10,7 +10,7 @@ require_once('config.php');
 require('urlconv.php');
 //Ist der Nutzter eingeloggt, wenn nein auf die Anmeldeseite weiterlieten
 if(!isset($_SESSION['userid']))
-{			
+{
 	            //Weiterleitung
 	            $host = $_SERVER['HTTP_HOST'];
 	            $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
@@ -39,7 +39,7 @@ if(isset($_POST['pinnwand']) && $_POST['pinnwand'] != "" && $_POST['pinnwand'] !
 	$homeid = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  profile WHERE administraedFrom = {$_SESSION['userid']} AND type = 1");
 	$homeid1 = mysqli_fetch_assoc($homeid);
 	$uid = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $homeid1['id']);
-	$uid1 = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['userid']);	
+	$uid1 = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['userid']);
 	//Schreibt die Werte in die Datenbank
 	$insert = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO pinnwand VALUES('','{$pw1}','{$uid1}','{$uid}','{$date}')");
 }
@@ -49,7 +49,7 @@ $open_friendship_request = mysqli_num_rows($select_friedship_requersts);
 //Gibt einen Link aus,  falls Anfragen vorhanden sind
 if($open_friendship_request > 0)
 {
-	$friendship_request = '<a href="requerst_anwser.php">'. $open_friendship_request.' Kontaktanfrage(n)</a>';	
+	$friendship_request = '<a href="requerst_anwser.php">'. $open_friendship_request.' Kontaktanfrage(n)</a>';
 	$friendship_request1 = '<div class="panel-heading hidden-lg hidden-sm hidden-md"><b>Anfragen</b></div><div class="panel-body hidden-lg hidden-sm hidden-md"><p>' . $friendship_request . '</p></div>';
 }
 //Liest die ID des Profiles aus
@@ -59,14 +59,14 @@ $userProfile = mysqli_fetch_assoc($selectUserProfile);
 ?>
 <html>
 <head>
-    
+
 	<meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
     <link href="designImages/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="floos_logo.png">
-	
+
     <script src="designImages/js/ie-emulation-modes-warning.js"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -78,14 +78,11 @@ $userProfile = mysqli_fetch_assoc($selectUserProfile);
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link href="style.css" rel="Stylesheet"></link>
-function onOffline() {
-    alert("Du bist offline");
-}</script>
 
-	<title> Dein Floos</title>
+	<title>Dein Floos</title>
 </head>
 <body>
-    <div class="container bs-docs-container" id="root"> 
+    <div class="container bs-docs-container" id="root">
         <div role="navigation" style="background-color:#02628a;" class="navbar navbar-inverse navbar-fixed-top">
                 <div class="container">
                 		   <img style="height:47px; width:auto; float:left; margin-right:10px;" src="designImages/floos_logo.png">
@@ -115,10 +112,10 @@ function onOffline() {
                             	 <a href="profile.php?p=<?php $homeid2 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM  profile WHERE administraedFrom = {$_SESSION['userid']} AND type = 1"); $homeid12 = mysqli_fetch_assoc($homeid2); echo $homeid12['id']; ?>">Mein Profil</a>
                             </li>
                             <li>
-                              <a href="chat.php">Chat</a> 
+                              <a href="chat.php">Chat</a>
                             </li>
                             <li>
-                              <a href="logout.php">Logout</a> 
+                              <a href="logout.php">Logout</a>
                             </li>
                           </ul>
                        </nav>
@@ -140,16 +137,16 @@ function onOffline() {
 										 		  Alle
 										 		</label>
 											</div>
-										
+
 											<li class="divider"></li>
   											<li><a href="flees_group.php">Neue Fleesgruppe</a></li>
      								    </ul>
 -->
-     								   
+
      								</div>
 <!-- /btn-group -->
      							</div>
-		           			</form>	
+		           			</form>
 					</div>
 	        <div class="col-md-2" >
 	        	<div class="panel panel-default">
@@ -158,7 +155,7 @@ function onOffline() {
 			            	<b>Meine Kontakte</b>
 					</div>
 					<div class="panel-body">
-			       		<?php 
+			       		<?php
 						$select1Frinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `friendship` WHERE `confired` = 1 AND `firstid` = '{$_SESSION['userid']}'");
 						while($frinds1 = mysqli_fetch_assoc($select1Frinds))
 						{
@@ -197,7 +194,7 @@ function onOffline() {
 							<b>Optionen</b>
 						</div>
 						<div class="panel-body">
-							<p>	
+							<p>
 								Neue
 								<a href="creat_page.php">
 									Seite
@@ -231,11 +228,11 @@ function onOffline() {
   											<li><a href="flees_group.php">Neue Fleesgruppe</a></li>
      								    </ul>-->
 
-     								   
+
      								</div>
 <!-- /btn-group -->
      							</div>
-		           			</form>	
+		           			</form>
 					</div>
 					<div  class="col-md-6 hidden-md hidden-lg" >
 						<?php
@@ -251,7 +248,7 @@ function onOffline() {
               	echo "<a href='chat.php?p=" . $newchatdata['firstID'] . "'>" . $smUserName['prename'] . " " . $smUserName['lastname']  . "</a><br>";
 
            }
-           echo "</div></div>"; 
+           echo "</div></div>";
         }
 						 //Profilbild ausgabe
 							$p33 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$_SESSION['userid']} AND type = 1 ");
@@ -263,7 +260,7 @@ function onOffline() {
 							}
 
 							?>
-		            	<?php 
+		            	<?php
 						// Profil anzeigen
 						$p3 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$_SESSION['userid']} AND type = 1 ");
 						$p4 = mysqli_fetch_assoc($p3);
@@ -271,7 +268,7 @@ function onOffline() {
 						$my_profil_info = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE id = {$p4['id']}");
 						$my_data = mysqli_fetch_assoc($my_profil_info);
 						echo $my_data['profilInfos']."</div></div>";
-			            ?>	
+			            ?>
 		            </div>
 					<div class="col-md-6" >
 						<?php
@@ -296,9 +293,9 @@ function onOffline() {
 					$np = "( " .$_SESSION['userid'] ;
 					while($frinds11 = mysqli_fetch_assoc($select11Frinds))
 					{
-						$np = $np . " , " . $frinds11['secondid'] ;                                                                
+						$np = $np . " , " . $frinds11['secondid'] ;
 					}
-					$select21Frinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `friendship` WHERE `confired` = 1 AND `secondid` = '{$_SESSION['userid']}'");		
+					$select21Frinds = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `friendship` WHERE `confired` = 1 AND `secondid` = '{$_SESSION['userid']}'");
 		            while($frinds21 = mysqli_fetch_assoc($select21Frinds))
 					{
 						$np = $np . " , " . $frinds21['firstid'] ;
@@ -374,7 +371,7 @@ function onOffline() {
 						?>
 		                </div>
 						<div  class="col-md-6 hidden-xs hidden-sm" >
-						<?php 
+						<?php
 						 //Sind neue Nachichten vorhanden?
 						 $myId = $_SESSION['userid'];
         $selctCHData = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM `Chat` WHERE `secondID` = " . $myId . " AND `read` = 0 ORDER BY time DESC");
@@ -387,7 +384,7 @@ function onOffline() {
               	echo "<a href='chat.php?p=" . $newchatdata['firstID'] . "'>" . $smUserName['prename'] . " " . $smUserName['lastname']  . "</a><br>";
 
            }
-           echo "</div></div>"; 
+           echo "</div></div>";
         }
 						$p33 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$_SESSION['userid']} AND type = 1 ");
 						$p43 = mysqli_fetch_assoc($p33);
@@ -397,7 +394,7 @@ function onOffline() {
 								echo "<div class='panel panel-default'><div class='panel-body'><img src='bilder/" . $p43['id'] . "." . $result['imgType'] . "' style='width:100%; height:auto;'></div></div>";
 							}
 						?>
-		                <?php 
+		                <?php
 						// Profil anzeigen
 						$p3 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$_SESSION['userid']} AND type = 1 ");
 						$p4 = mysqli_fetch_assoc($p3);
@@ -405,7 +402,7 @@ function onOffline() {
 						$my_profil_info = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE id = {$p4['id']}");
 						$my_data = mysqli_fetch_assoc($my_profil_info);
 						echo $my_data['profilInfos']."</div></div>";
-			            ?>	
+			            ?>
 		                </div>
 	            	</div>
 				</div>
@@ -423,5 +420,5 @@ function onOffline() {
     		</div>
 			<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 			<script src="designImages/js/bootstrap.js"></script>
-        </body>    
+        </body>
 </html>
