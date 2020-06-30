@@ -35,20 +35,20 @@ if ($_FILES['img']['size'] < 10000000) {
             //Weiterleitung
             $host = $_SERVER['HTTP_HOST'];
             $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-            header("Location: http://$host$uri/edit-profile.php?p=" . $userid);
+            header("Location: http://$host$uri/edit_profile.php?p=" . $userid);
             exit;
         }
     } else {
         //Weiterleitung
         $host = $_SERVER['HTTP_HOST'];
         $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-        header("Location: http://$host$uri/edit-profile.php?p=" . $userid);
+        header("Location: http://$host$uri/edit_profile.php?p=" . $userid);
         exit;
     }
 } else {
     //Weiterleitung
     $host = $_SERVER['HTTP_HOST'];
     $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-    header("Location: http://$host$uri/edit-profile.php?s=1&p=" . $_POST['id']);
+    header("Location: http://$host$uri/edit_profile.php?s=1&p=" . $_POST['id']);
     exit;
 }

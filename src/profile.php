@@ -354,7 +354,7 @@ if ($read_ok == "ok") {
     //Guckt, ob es der Richtige Nutzer ist, der Daten abfragt
     //Wenn ja, darf er die Werte bearbeiten
     if (mysqli_num_rows($selectIsUserProfile) > 0) {
-        echo "&nbsp;<a>[</a><a href='edit-profile.php?p={$_GET['p']}'>Bearbeiten</a><a>]</a>";
+        echo "&nbsp;<a>[</a><a href='edit_profile.php?p={$_GET['p']}'>Bearbeiten</a><a>]</a>";
     }
     echo "</div><div class='panel-body'>" . $profileInfo . "</div>";
 }
@@ -441,7 +441,7 @@ if ($read_ok == "ok") {
         $id2 = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $homeid1['id']);
         if ($user_data['administraedFrom'] == $_SESSION['userid']) {
 
-            $admin = "<li><a href='delflees.php?f=" . $pwData['id'] . "'>
+            $admin = "<li><a href='delete_flees.php?f=" . $pwData['id'] . "'>
 		    							L&ouml;schen
 		    							</a></li>";
 
@@ -504,7 +504,7 @@ if ($read_ok == "ok") {
     //Guckt, ob es der Richtige Nutzer ist, der Daten abfragt
     //Wenn ja, darf er die Werte bearbeiten
     if (mysqli_num_rows($selectIsUserProfile) > 0) {
-        echo "&nbsp;<a>[</a><a href='edit-profile.php?p={$_GET['p']}'>Bearbeiten</a><a>]</a>";
+        echo "&nbsp;<a>[</a><a href='edit_profile.php?p={$_GET['p']}'>Bearbeiten</a><a>]</a>";
     }
     echo "</div><div class='panel-body'>" . $profileInfo . "</div>";}
 ?>

@@ -244,7 +244,7 @@ if (mysqli_num_rows($result) > 0) {
 // Profil anzeigen
 $p3 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$_SESSION['userid']} AND type = 1 ");
 $p4 = mysqli_fetch_assoc($p3);
-echo "<div class='panel panel-default'><div class='panel-heading'><b>Mein Profil</b><a> [</a><a  href='edit-profile.php?p=" . $p4['id'] . "'>Bearbeiten</a><a>]</a></div><div class='panel-body'>";
+echo "<div class='panel panel-default'><div class='panel-heading'><b>Mein Profil</b><a> [</a><a  href='edit_profile.php?p=" . $p4['id'] . "'>Bearbeiten</a><a>]</a></div><div class='panel-body'>";
 $my_profil_info = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE id = {$p4['id']}");
 $my_data = mysqli_fetch_assoc($my_profil_info);
 echo $my_data['profilInfos'] . "</div></div>";
@@ -371,7 +371,7 @@ if (mysqli_num_rows($result) > 0) {
 // Profil anzeigen
 $p3 = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE administraedFrom = {$_SESSION['userid']} AND type = 1 ");
 $p4 = mysqli_fetch_assoc($p3);
-echo "<div class='panel panel-default'><div class='panel-heading'><b>Mein Profil</b><a> [</a><a  href='edit-profile.php?p=" . $p4['id'] . "'>Bearbeiten</a><a>]</a></div><div class='panel-body'>";
+echo "<div class='panel panel-default'><div class='panel-heading'><b>Mein Profil</b><a> [</a><a  href='edit_profile.php?p=" . $p4['id'] . "'>Bearbeiten</a><a>]</a></div><div class='panel-body'>";
 $my_profil_info = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM profile WHERE id = {$p4['id']}");
 $my_data = mysqli_fetch_assoc($my_profil_info);
 echo $my_data['profilInfos'] . "</div></div>";

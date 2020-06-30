@@ -219,7 +219,7 @@ while ($frinds8 = mysqli_fetch_assoc($select1Profile)) {
                         <span style="padding-left:5px;" class="glyphicon glyphicon-pencil"></span>
                     </div>
                     <div class="panel-body">
-                        <form action="edit-profile.php" method="post">
+                        <form action="edit_profile.php" method="post">
                             <b>Name:</b><br>
                             <input class="form-control" <?php echo $dis1; ?> type="text" name="profiname"
                                 style="width:100%" value="<?php echo $data['profileName']; ?>"><br>
