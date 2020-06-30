@@ -130,7 +130,7 @@ echo $homeid12['id'];?>">
                 </nav>
             </div>
         </div>
-        <div id="content" style="background-image:none;padding-left:0px; padding-top:50px;">
+        <div id="content" class="row" style="background-image:none;padding-left:0px; padding-top:50px;">
             <div class="col-md-12 hidden-md hidden-lg">
                 <h2>Home</h2>
                 <form action="home.php" method="post">

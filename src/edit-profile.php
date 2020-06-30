@@ -155,7 +155,7 @@ if ($data['type'] == 1) {
                 </nav>
             </div>
         </div>
-        <div id="content" style="background-image:none;padding-left:0px; padding-top:50px;">
+        <div id="content" class="row" style="background-image:none;padding-left:0px; padding-top:50px;">
             <div class="col-md-2 hidden-xs hidden-sm">
                 <div class="panel panel-default">
                     <div class="panel-heading">

@@ -22,7 +22,7 @@ if(!isset($_SESSION['userid']))
     <div id="root">
         <div id="logo"></div>
         <div id="sub-navi"><form action="serach.php" method="get"><input type="search" value="Suche" name="s" style="right:10px; float:left; width:162px;" onfocus="if(this.value == 'Suche') this.value = ''" onBlur="if(this.value == '') this.value = 'Suche'">	  	<?php echo $friendship_request; ?><a href="home.php">Home</a><a>  </a><a href="logout.php">Logout </a></form></div>
-        <div id="content" style="background-image:none;">
+        <div id="content" class="row" style="background-image:none;">
             <div id="main-content" style="width:990px;">
             <form action="p-bild.php" method="post" enctype="multipart/form-data">
 <input type="file" name="datei">
@@ -35,7 +35,7 @@ if($dateityp[2] != 0)
    {
 
       move_uploaded_file($_File['datei']['tmp_name'], $_File['datei'][ "bilder/".$_SESSION['userid'].".".$_File['datei']['type']]);
-     
+
     }
 
 else
@@ -45,5 +45,5 @@ else
 ?>
         </div>
     </div>
-</body>    
+</body>
 </html>

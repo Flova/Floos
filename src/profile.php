@@ -241,7 +241,7 @@ if (mysqli_num_rows($loadantraege) != 0) {
                 </nav>
             </div>
         </div>
-        <div id="content" style="background-image:none;padding-left:0px; padding-top:50px;">
+        <div id="content" class="row" style="background-image:none;padding-left:0px; padding-top:50px;">
             <div class="col-md-2">
                 <div class="panel panel-default hidden-xs hidden-sm">
                     <div class="panel-heading">
