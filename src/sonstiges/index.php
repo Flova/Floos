@@ -12,7 +12,7 @@ if(isset($_SESSION['userid']))
 <html>
 <head>
     <link href="style.css" rel="Stylesheet" type="text/css" media="screen"></link>
-    <link href="designImages/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="sonstiges/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <title>Willkommen bei FLOOS</title>
     <link rel="stylesheet" href="sonstiges/css/bootstrap.css">
 </head>
@@ -45,5 +45,5 @@ if(isset($_SESSION['userid']))
          </div>
          <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
          <script type="text/javascript" src="sonstiges/js/bootstrap.min.js"></script>
- </body>    
+ </body>
 </html>

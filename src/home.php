@@ -61,13 +61,13 @@ $userProfile = mysqli_fetch_assoc($selectUserProfile);
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
-    <link href="designImages/css/bootstrap.min.css" rel="stylesheet">
+    <link href="sonstiges/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="floos_logo.png">
 
-    <script src="designImages/js/ie-emulation-modes-warning.js"></script>
+    <script src="sonstiges/js/ie-emulation-modes-warning.js"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="designImages/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="sonstiges/js/ie10-viewport-bug-workaround.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -392,7 +392,7 @@ echo $my_data['profilInfos'] . "</div></div>";
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="designImages/js/bootstrap.js"></script>
+    <script src="sonstiges/js/bootstrap.js"></script>
 </body>
 
 </html>

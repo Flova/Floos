@@ -4,7 +4,7 @@ session_start();
 //Bindet die Datnbankverbindung ein
 require_once 'config.php';
 //Refresh
-echo '<html><head><meta http-equiv="refresh" content="2;"><link href="designImages/css/bootstrap.min.css" rel="stylesheet"></head><body>';
+echo '<html><head><meta http-equiv="refresh" content="2;"><link href="sonstiges/css/bootstrap.min.css" rel="stylesheet"></head><body>';
 
 //Ist der Nutzter eingeloggt, wenn nein auf die Anmeldeseite weiterlieten
 if (!isset($_SESSION['userid'])) {

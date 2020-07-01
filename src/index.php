@@ -28,13 +28,13 @@ if (isset($_COOKIE["userid"])) {
     <meta name="keywords"
         content="netzwek,sozial,floos,florian,vahl,tyll,peters,anmelden,registrieren,user,login,vernetzen,Alternative,sch&uuml;ler">
 
-    <link href="designImages/css/bootstrap.min.css" rel="stylesheet">
+    <link href="sonstiges/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="floos_logo.png">
 
-    <script src="designImages/js/ie-emulation-modes-warning.js"></script>
+    <script src="sonstiges/js/ie-emulation-modes-warning.js"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="designImages/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="sonstiges/js/ie10-viewport-bug-workaround.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
