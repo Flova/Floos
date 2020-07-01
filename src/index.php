@@ -63,7 +63,6 @@ if (isset($_COOKIE["userid"])) {
         <div class="container bs-docs-container" style="padding-top:49px;">
             <div class="jumbotron">
                 <h1>Willkommen auf Floos</h1>
-                <h3 style="margin-bottom:40px;">Der Alternative</h3>
                 <?php
 if (!isset($_GET['f'])) {} else {
     echo '<div class="alert alert-danger">Die Anmeldung ist leider fehlgeschlagen</div>';
